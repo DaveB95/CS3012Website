@@ -2,7 +2,7 @@
 /**
  * Open Source Social Network
  *
- * @package   Open Source Social Network
+ * @packageOpen Source Social Network
  * @author    Open Social Website Core Team <info@informatikon.com>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
  * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
@@ -17,8 +17,11 @@ if ($send->send(ossn_loggedin_user()->guid, $to, $message)) {
 	
 	$params['user'] = $user;
     $params['message'] = $message;
-    echo ossn_view('components/OssnMessages/templates/message-send', $params);
+    echo ossn_plugin_view('messages/templates/message-send', $params);
 
 } else {
     echo 0;
 }
+//messages only at some points #470
+// don't mess with system ajax requests
+exit;

@@ -2,7 +2,7 @@
 /**
  * Open Source Social Network
  *
- * @package   Open Source Social Network
+ * @packageOpen Source Social Network
  * @author    Open Social Website Core Team <info@informatikon.com>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
  * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
@@ -13,14 +13,15 @@ require_once(__OSSN_CHAT__ . 'classes/OssnChat.php');
 require_once(__OSSN_CHAT__ . 'libs/ossn.lib.chat.php');
 
 function ossn_chat_init() {
-    ossn_extend_view('css/ossn.default', 'components/OssnChat/css/OssnChat');
+    ossn_extend_view('css/ossn.default', 'css/OssnChat');
 
-    ossn_new_js('ossn.chat', 'components/OssnChat/js/OssnChat');
-    ossn_load_js('ossn.chat');
+    ossn_new_js('ossn.chat', 'js/OssnChat');
 
     //chat bar
     if (ossn_isLoggedIn()) {
-        ossn_extend_view('ossn/page/footer', 'components/OssnChat/views/OssnChat/chatbar');
+        //load js and chatbar if user is loggedin
+        ossn_load_js('ossn.chat');
+        ossn_extend_view('ossn/page/footer', 'chat/chatbar');
     }
     ossn_register_page('ossnchat', 'ossn_js_page_handler');
 
@@ -37,7 +38,7 @@ function ossn_js_page_handler($pages) {
             }
             if (isset($pages[1]) && $pages[1] == 'ossn.boot.chat.js') {
                 header('Content-Type: application/javascript');
-                echo ossn_view('components/OssnChat/js/OssnChat.Boot');
+                echo ossn_plugin_view('js/OssnChat.Boot');
             }
             break;
         case 'selectfriend':
@@ -46,7 +47,7 @@ function ossn_js_page_handler($pages) {
                 $user = ossn_user_by_guid($user);
                 OssnChat::setUserChatSession($user);
                 $friend['user'] = $user;
-                echo ossn_view('components/OssnChat/views/OssnChat/selectfriend', $friend);
+                echo ossn_plugin_view('chat/selectfriend', $friend);
             }
             break;
         default:

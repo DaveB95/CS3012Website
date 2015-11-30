@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 $pages = range(1, $params['total']);
 
@@ -14,14 +14,8 @@ $pages = range(1, $params['total']);
 unset($_GET['h']);
 unset($_GET['p']);
 unset($_GET['offset']);
-if (count($_GET)) {
-    $args_url = '';
-    foreach ($_GET as $key => $value) {
-        if ($key != 'page') {
-            $args_url .= '&' . $key . '=' . $value;
-        }
-    }
-}
+
+$args_url = OssnPagination::constructUrlArgs();
 
 //if there is only one page don't show pagination
 if (count($pages) !== 1) {
@@ -60,26 +54,26 @@ if (count($pages) !== 1) {
 		}
 	}
 	
-	echo '<div class="ossn-pagination">';
+	echo '<ul class="pagination ossn-pagination">';
   	//disaply first if first page is exist
 	if(isset($first) && !empty($first)){
         $url = "?offset={$first}{$args_url}";
-     	echo "<a href='{$url}' class='ossn-pagination-page'><li>".ossn_print('ossn:pagination:first')."</li></a>";	
+     	echo "<li><a href='{$url}' class='ossn-pagination-page'>".ossn_print('ossn:pagination:first')."</a></li>";	
 	} 
    foreach ($pages as $page) {
         if ($page == $params['offset']) {
-            $selected = 'class="selected"';
+            $selected = 'class="active"';
             $url = "?offset={$page}{$args_url}";
-            echo "<a href='{$url}' class='ossn-pagination-page'><li {$selected}>{$page}</li></a>";
+            echo "<li {$selected}><a href='{$url}'>{$page}</a></li>";
         } else {
             $url = "?offset={$page}{$args_url}";
-            echo "<a href='{$url}' class='ossn-pagination-page'><li>{$page}</li></a>";
+            echo "<li><a href='{$url}'>{$page}</a></li>";
         }
     }
 	//disply last page if it exist
 	if(isset($last) && !empty($last)){
         $url = "?offset={$last}{$args_url}";
-     	echo "<a href='{$url}' class='ossn-pagination-page'><li>".ossn_print('ossn:pagination:last')."</li></a>";	
+     	echo "<li><a href='{$url}'>".ossn_print('ossn:pagination:last')."</a></li>";	
 	}
-echo '</div>';
+echo '</ul>';
 }

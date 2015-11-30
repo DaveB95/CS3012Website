@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 //register all available language
@@ -84,7 +84,7 @@ function ossn_system_error_pagehandler($pages) {
                 'contents' => $error,
                 'callback' => false,
             );
-            echo ossn_view('system/templates/output/ossnbox', $params);
+            echo ossn_plugin_view('output/ossnbox', $params);
             break;
     }
 }
@@ -106,7 +106,7 @@ function ossn_user_pagehandler($home, $handler) {
             }
             $title = ossn_print('news:feed');
             if (com_is_active('OssnWall')) {
-                $contents['content'] = ossn_view('components/OssnWall/pages/wall');
+                $contents['content'] = ossn_plugin_view('wall/pages/wall');
             }
             $content = ossn_set_page_layout('newsfeed', $contents);
             echo ossn_view_page($title, $content);
@@ -117,10 +117,10 @@ function ossn_user_pagehandler($home, $handler) {
             }            
             $user = input('user');
             $code = input('c');
-            $contents['content'] = ossn_view('pages/contents/user/resetlogin');
+            $contents['content'] = ossn_plugin_view('pages/contents/user/resetlogin');
 
             if (!empty($user) && !empty($code)) {
-                $contents['content'] = ossn_view('pages/contents/user/resetcode');
+                $contents['content'] = ossn_plugin_view('pages/contents/user/resetcode');
             }
             $title = ossn_print('reset:login');
             $content = ossn_set_page_layout('startup', $contents);
@@ -131,7 +131,7 @@ function ossn_user_pagehandler($home, $handler) {
                 redirect('home');
             }
             $title = ossn_print('site:login');
-            $contents['content'] = ossn_view('pages/contents/user/login');
+            $contents['content'] = ossn_plugin_view('pages/contents/user/login');
             $content = ossn_set_page_layout('startup', $contents);
             echo ossn_view_page($title, $content);
             break;
@@ -141,7 +141,7 @@ function ossn_user_pagehandler($home, $handler) {
                 redirect('home');
             }
             $title = ossn_print('account:registered');
-            $contents['content'] = ossn_view('pages/contents/user/registered');
+            $contents['content'] = ossn_plugin_view('pages/contents/user/registered');
             $content = ossn_set_page_layout('startup', $contents);
             echo ossn_view_page($title, $content);
             break;
@@ -170,7 +170,7 @@ function ossn_index_pagehandler($index) {
     }
     switch ($page) {
         case 'home':
-            echo ossn_view('pages/index');
+            echo ossn_plugin_view('pages/index');
             break;
 
         default:
@@ -179,5 +179,14 @@ function ossn_index_pagehandler($index) {
 
     }
 }
-
+/**
+ * Loads system plugins before we load components.
+ *
+ * @return void
+ */
+function ossn_system_plugins_load(){
+	//load system plugins before components load #451
+	ossn_register_plugins_by_path(ossn_route()->system . 'plugins/');	
+}
 ossn_register_callback('ossn', 'init', 'ossn_initialize');
+ossn_register_callback('components', 'before:load', 'ossn_system_plugins_load');

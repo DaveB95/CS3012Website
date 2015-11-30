@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 //init ossnwall
@@ -40,9 +40,20 @@ if (!empty($privacy)) {
     $access = OSSN_FRIENDS;
 }
 if ($OssnWall->Post($post, $friends, $location, $access)) {
-    //no need to show message on success
-    // ossn_trigger_message(ossn_print('post:created'), 'success');
-    redirect(REF);
+		if(ossn_is_xhr()) {
+				$guid = $OssnWall->getObjectId();
+				$get  = $OssnWall->GetPost($guid);
+				if($get) {
+						$get = ossn_wallpost_to_item($get);
+						ossn_set_ajax_data(array(
+								'post' => ossn_wall_view_template($get)
+						));
+				}
+		}
+		//no need to show message on success.
+		//3.x why not? $arsalanshah
+		ossn_trigger_message(ossn_print('post:created'));
+		redirect(REF);
 } else {
     ossn_trigger_message(ossn_print('post:create:error'), 'error');
     redirect(REF);

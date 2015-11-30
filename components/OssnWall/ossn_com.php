@@ -2,7 +2,7 @@
 /**
  * Open Source Social Network
  *
- * @package   Open Source Social Network
+ * @packageOpen Source Social Network
  * @author    Open Social Website Core Team <info@informatikon.com>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
  * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
@@ -26,12 +26,12 @@ function ossn_wall() {
 				ossn_register_action('wall/post/g', __OSSN_WALL__ . 'actions/wall/post/group.php');
 				ossn_register_action('wall/post/delete', __OSSN_WALL__ . 'actions/wall/post/delete.php');
 		}
-		if(ossn_isAdminLoggedin()){
-				ossn_register_action('wall/admin/settings', __OSSN_WALL__ . 'actions/wall/admin/settings.php');		
+		if(ossn_isAdminLoggedin()) {
+				ossn_register_action('wall/admin/settings', __OSSN_WALL__ . 'actions/wall/admin/settings.php');
 		}
 		//css and js
-		ossn_extend_view('css/ossn.default', 'components/OssnWall/css/wall');
-		ossn_extend_view('js/opensource.socialnetwork', 'components/OssnWall/js/ossn_wall');
+		ossn_extend_view('css/ossn.default', 'css/wall');
+		ossn_extend_view('js/opensource.socialnetwork', 'js/ossn_wall');
 		
 		//pages
 		ossn_register_page('post', 'ossn_post_page');
@@ -95,8 +95,9 @@ function ossn_likes_post_notifiation($hook, $type, $return, $params) {
 		$baseurl        = ossn_site_url();
 		$user           = ossn_user_by_guid($notif->poster_guid);
 		$user->fullname = "<strong>{$user->fullname}</strong>";
+		$iconURL = $user->iconURL()->small;
 		
-		$img = "<div class='notification-image'><img src='{$baseurl}/avatar/{$user->username}/small' /></div>";
+		$img = "<div class='notification-image'><img src='{$iconURL}' /></div>";
 		$url = ossn_site_url("post/view/{$notif->subject_guid}");
 		
 		if(preg_match('/like/i', $notif->type)) {
@@ -140,8 +141,9 @@ function ossn_group_comment_post($hook, $type, $return, $params) {
 		$baseurl        = ossn_site_url();
 		$user           = ossn_user_by_guid($notif->poster_guid);
 		$user->fullname = "<strong>{$user->fullname}</strong>";
+		$iconURL = $user->iconURL()->small;
 		
-		$img = "<div class='notification-image'><img src='{$baseurl}/avatar/{$user->username}/small' /></div>";
+		$img = "<div class='notification-image'><img src='{$iconURL}' /></div>";
 		$url = ossn_site_url("post/view/{$notif->subject_guid}");
 		
 		if(preg_match('/like/i', $notif->type)) {
@@ -191,16 +193,41 @@ function ossn_post_page($pages) {
 						$params['post'] = $post;
 						
 						$contents = array(
-								'content' => ossn_view('components/OssnWall/pages/view', $params)
+								'content' => ossn_plugin_view('wall/pages/view', $params)
 						);
 						$content  = ossn_set_page_layout('newsfeed', $contents);
 						echo ossn_view_page($title, $content);
 						break;
 				case 'photo':
 						if(isset($pages[1]) && isset($pages[2])) {
+								$name = str_replace(array(
+										'.jpg',
+										'.jpeg',
+										'gif'
+								), '', $pages[2]);
+								
+								$etag = $pages[1] . $name;
+								if(isset($_SERVER['HTTP_IF_NONE_MATCH']) && trim($_SERVER['HTTP_IF_NONE_MATCH']) == "\"$etag\"") {
+										header("HTTP/1.1 304 Not Modified");
+										exit;
+								}
+								
 								$image = ossn_get_userdata("object/{$pages[1]}/ossnwall/images/{$pages[2]}");
-								header('Content-Type: image/jpeg');
-								echo file_get_contents($image);
+								//get image file else show error page
+								if(is_file($image)) {
+										//Image cache on wall post #529
+										$filesize = filesize($image);
+										header("Content-type: image/jpeg");
+										header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', strtotime("+6 months")), true);
+										header("Pragma: public");
+										header("Cache-Control: public");
+										header("Content-Length: $filesize");
+										header("ETag: \"$etag\"");
+										readfile($image);
+										return;
+								} else {
+										ossn_error_page();
+								}
 						}
 						
 						break;
@@ -208,14 +235,14 @@ function ossn_post_page($pages) {
 						if(ossn_is_xhr()) {
 								$params = array(
 										'title' => ossn_print('privacy'),
-										'contents' => ossn_view('components/OssnWall/wall/privacy'),
+										'contents' => ossn_plugin_view('wall/privacy'),
 										'callback' => '#ossn-wall-privacy'
 								);
-								echo ossn_view('system/templates/output/ossnbox', $params);
+								echo ossn_plugin_view('output/ossnbox', $params);
 						}
 						break;
 				case 'refresh_home':
-						echo ossn_view('components/OssnWall/wall/siteactivity');
+						echo ossn_plugin_view('wall/siteactivity');
 						break;
 				default:
 						ossn_error_page();
@@ -237,16 +264,19 @@ function ossn_post_page($pages) {
 function ossn_wall_post_menu($hook, $type, $return, $params) {
 		if($params['post']->poster_guid == ossn_loggedin_user()->guid || $params['post']->owner_guid == ossn_loggedin_user()->guid || ossn_isAdminLoggedin()) {
 				$deleteurl = ossn_site_url("action/wall/post/delete?post={$params['post']->guid}", true);
-				ossn_register_menu_link("delete", ossn_print('ossn:post:delete'), array(
+				ossn_unregister_menu('delete', 'wallpost');
+				ossn_register_menu_item("wallpost", array(
+					 	'name' => 'delete',
 						'class' => 'ossn-wall-post-delete',
+						'text' => ossn_print('delete'),
 						'href' => $deleteurl,
 						'data-guid' => $params['post']->guid
-				), 'wallpost');
+				));
 				
 		} else {
-				ossn_unregister_menu('delete', 'wallpost');
+				ossn_unregister_menu("delete", 'wallpost');
 		}
-		return ossn_view_menu('wallpost', 'components/OssnWall/menus/post-controls');
+		return ossn_view_menu('wallpost', 'wall/menus/post-controls');
 }
 /**
  * Delete group wall posts
@@ -326,8 +356,9 @@ function ossn_wall_view_template(array $params) {
  * @access private
  */
 function ossn_wall_templates($hook, $type, $return, $params) {
+		ossn_trigger_callback('wall', 'load:item', $params);
 		$params = ossn_call_hook('wall', 'templates:item', $params, $params);
-		return ossn_view("components/OssnWall/templates/wall/{$type}/item", $params);
+		return ossn_plugin_view("wall/templates/wall/{$type}/item", $params);
 }
 /**
  * Set homepage wall items type friends/public 
@@ -351,8 +382,8 @@ function ossn_set_homepage_wall_access($default = 'friends') {
 						'value' => $default
 				));
 		} else {
-			$settings = $data[0];
-			return ossn_update_entity($settings->guid, $default);
+				$settings = $data[0];
+				return ossn_update_entity($settings->guid, $default);
 		}
 }
 /**
@@ -377,6 +408,43 @@ function ossn_get_homepage_wall_access() {
 		} else {
 				return 'public';
 		}
+}
+/**
+ * Convert wallobject to wall post item
+ *
+ * @param object $post A wall object
+ * 
+ * @return array|false
+ */
+function ossn_wallpost_to_item($post) {
+		if($post && $post instanceof OssnWall) {
+				if(!isset($post->poster_guid)) {
+						$post = ossn_get_object($post->guid);
+				}
+				$data     = json_decode(html_entity_decode($post->description));
+				$text     = ossn_restore_new_lines($data->post, true);
+				$location = '';
+				
+				if(isset($data->location)) {
+						$location = '- ' . $data->location;
+				}
+				if(isset($post->{'file:wallphoto'})) {
+						$image = str_replace('ossnwall/images/', '', $post->{'file:wallphoto'});
+				} else {
+						$image = '';
+				}
+				
+				$user = ossn_user_by_guid($post->poster_guid);
+				return array(
+						'post' => $post,
+						'friends' => explode(',', $data->friend),
+						'text' => $text,
+						'location' => $location,
+						'user' => $user,
+						'image' => $image
+				);
+		}
+		return false;
 }
 //initilize ossn wall
 ossn_register_callback('ossn', 'init', 'ossn_wall');

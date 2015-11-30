@@ -2,7 +2,7 @@
 /**
  * Open Source Social Network
  *
- * @package   Open Source Social Network
+ * @packageOpen Source Social Network
  * @author    Open Social Website Core Team <info@informatikon.com>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
  * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
@@ -25,8 +25,8 @@ function ossn_ads() {
     }
     ossn_register_page('ossnads', 'ossn_ads_handler');
 	
-    ossn_extend_view('css/ossn.default', 'components/OssnAds/css/ads');
-	ossn_extend_view('css/ossn.admin.default', 'components/OssnAds/css/ads.admin');
+    ossn_extend_view('css/ossn.default', 'css/ads');
+	ossn_extend_view('css/ossn.admin.default', 'css/ads.admin');
 }
 
 /**

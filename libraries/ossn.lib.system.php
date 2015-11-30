@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 /*
@@ -276,14 +276,15 @@ function ossn_register_callback($event, $type, $callback, $priority = 200) {
 /**
  * Get a site settings
  *
- * @param string $setting Settings Name like ( site_name, language)
+ * @param string $setting Settings Name like (site_name, language)
  *
  * @return string or null
  */
 function ossn_site_settings($setting) {
     global $Ossn;
     if (isset($Ossn->siteSettings->$setting)) {
-        return $Ossn->siteSettings->$setting;
+		//allow to override a settings
+        return ossn_call_hook('load:settings', $setting, false, $Ossn->siteSettings->$setting);
     }
     return false;
 }
@@ -296,17 +297,21 @@ function ossn_site_settings($setting) {
  * @return return
  */
 function redirect($new = '') {
+	global $Ossn;
     $url = ossn_site_url($new);
     if ($new === REF) {
         if (isset($_SERVER['HTTP_REFERER'])) {
         	$url = $_SERVER['HTTP_REFERER'];
         } else {
 		$url = ossn_site_url();
-	}
+		}
     }
-    header("Location: {$url}");
-    exit;
-
+	if(ossn_is_xhr()){
+		$Ossn->redirect = $url;	
+	} else {
+    	header("Location: {$url}");
+		exit;
+	}
 }
 
 /**
@@ -422,7 +427,7 @@ function ossn_site_setting_update($name, $value, $id) {
  *
  * @return bool
  */
-function ossn_system_message_add($message = null, $register = "ossn-message-success", $count = false) {
+function ossn_system_message_add($message = null, $register = "success", $count = false) {
     if (!isset($_SESSION['ossn_messages'])) {
         $_SESSION['ossn_messages'] = array();
     }
@@ -470,13 +475,12 @@ function ossn_system_message_add($message = null, $register = "ossn-message-succ
  * @return void
  */
 function ossn_trigger_message($message, $type = 'success') {
-    if ($type == 'error') {
-        ossn_system_message_add($message, 'ossn-message-error');
+ 	if ($type == 'error') {
+        ossn_system_message_add($message, 'danger');
     }
     if ($type == 'success') {
-        ossn_system_message_add($message, 'ossn-message-success');
+        ossn_system_message_add($message, 'success');
     }
-
 }
 /**
  * Display a error if post size exceed
@@ -508,7 +512,8 @@ function ossn_display_system_messages() {
             if (isset($dermessage) && is_array($dermessage) && sizeof($dermessage) > 0) {
                 foreach ($dermessage as $type => $list) {
 			foreach($list as $message){
-                            $m = "<div class='$type'>";
+                            $m = "<div class='alert alert-$type'>";
+							$m .= '<a href="#" class="close" data-dismiss="alert">&times;</a>';
                             $m .= $message;
                             $m .= '</div>';
                             $ms[] = $m;
@@ -562,13 +567,17 @@ function ossn_validate_filepath($path, $append_slash = TRUE) {
  * @return mix data
  */
 function ossn_error_page() {
-    $title = ossn_print('page:error');
-    $contents['content'] = ossn_view('pages/contents/error');
-    $contents['background'] = false;
-    $content = ossn_set_page_layout('contents', $contents);
-    $data = ossn_view_page($title, $content);
-    echo $data;
-    exit;
+	if(ossn_is_xhr()){
+		header("HTTP/1.0 404 Not Found");
+	} else {
+	    $title = ossn_print('page:error');
+    	$contents['content'] = ossn_plugin_view('pages/contents/error');
+    	$contents['background'] = false;
+    	$content = ossn_set_page_layout('contents', $contents);
+    	$data = ossn_view_page($title, $content);
+    	echo $data;
+	}
+    	exit;
 }
 
 /**
@@ -675,7 +684,7 @@ function _ossn_php_error_handler($errno, $errmsg, $filename, $linenum, $vars) {
 	switch ($errno) {
 		case E_USER_ERROR:
 			error_log("PHP ERROR: $error");
-			register_error("ERROR: $error");
+			ossn_trigger_message("ERROR: $error", 'error');
 
 			// Since this is a fatal error, we want to stop any further execution but do so gracefully.
 			throw new Exception($error);
@@ -716,8 +725,8 @@ function ossn_check_update() {
         $file = file_get_contents($url, false, $context);
         $data = json_decode($file);
         $file = simplexml_load_string(base64_decode($data->content));
-        if (!empty($file->version)) {
-            return ossn_print('ossn:version:avaialbe', $file->version);
+        if (!empty($file->stable_version)) {
+            return ossn_print('ossn:version:avaialbe', $file->stable_version);
         }
     }
     return ossn_print('ossn:update:check:error');
@@ -731,6 +740,35 @@ function ossn_check_update() {
 function _ossn_exception_handler($exception){
 	$params['exception'] = $exception;
 	echo ossn_view('system/handlers/errors', $params);
+}
+/**
+ * Set Ajax Data
+ * Use only in action files
+ *
+ * @param array $data A data array
+ *
+ * @return void
+ */
+function ossn_set_ajax_data(array $data = array()){
+	global $Ossn;
+	if(ossn_is_xhr()){
+		$Ossn->ajaxData = $data;
+	}
+}
+/**
+ * Generate .htaccess file
+ *
+ * @return ooolean;
+ */
+function ossn_generate_server_config($type){
+	if($type == 'apache'){
+		$file = ossn_route()->www . 'installation/configs/htaccess.dist';
+		$file = file_get_contents($file);
+		return file_put_contents(ossn_route()->www . '.htaccess', $file);
+	}elseif($type == 'nginx'){
+		return false;
+	}
+	return false;
 }
 ossn_errros();
 ossn_register_callback('ossn', 'init', 'ossn_system');

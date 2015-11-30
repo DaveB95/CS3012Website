@@ -1,13 +1,12 @@
 <?php
-
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 class OssnPhotos extends OssnFile {
     /**
@@ -38,6 +37,7 @@ class OssnPhotos extends OssnFile {
             $this->setFile($photo);
             $this->permission = $access;
             $this->setPath('album/photos/');
+            $this->setExtension(array('jpg', 'png', 'jpeg', 'gif'));
 
             //add file
             if ($this->addFile()) {
@@ -143,8 +143,12 @@ class OssnPhotos extends OssnFile {
             $file = $this->fetchFile();
             $source = ossn_get_userdata("user/{$file->owner_guid}/{$file->value}");
 
-			if(unlink($source)){
+			if($this->deleteEntity($this->file_id)){
+				//delete file
+				unlink($source);
+				$params['photo'] = get_object_vars($file);
 				ossn_trigger_callback('delete', 'profile:cover:photo', $params);
+				return true;
 			}
       
         }

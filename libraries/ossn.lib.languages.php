@@ -2,7 +2,7 @@
 /**
  * Open Source Social Network
  *
- * @package   Open Source Social Network
+ * @packageOpen Source Social Network
  * @author    Open Social Website Core Team <info@informatikon.com>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
  * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
@@ -10,40 +10,37 @@
  */
 /**
  * Register a language in system;
- * @params: $code = code of language;
- * @params: $file = file which contain languages;
- * @last edit: $arsalanshah
- * @Reason: Initial;
+ * @param  string $code code of language;
  *
+ * @last edit: $arsalanshah
+ * @return void;
  */
 function ossn_register_language($code = '', $file) {
 		if(isset($code) && isset($file)) {
 				global $Ossn;
-				return $Ossn->locale[$code][] = $file;
+				$Ossn->locale[$code][] = $file;
 		}
 }
 
 /**
  * Get a languages strings;
- * @params: $code = code of language;
- * @params: $params = strings;
- * @last edit: $arsalanshah
- * @Reason: Initial;
- *
+ * @param string $code Code of language;
+ * @param array $params Translations;
+ * 
+ * @return void;
  */
 function ossn_register_languages($code, $params = array()) {
 		global $Ossn;
 		if(isset($Ossn->localestr[$code], $code)) {
 				$params = array_merge($Ossn->localestr[$code], $params);
 		}
-		return $Ossn->localestr[$code] = $params;
+		$Ossn->localestr[$code] = $params;
 }
 
 /**
  * Get registered language codes;
- * @last edit: $arsalanshah
- * @Reason: Initial;
- *
+ * 
+ * @return array
  */
 function ossn_locales() {
 		global $Ossn;
@@ -63,10 +60,10 @@ function ossn_locales() {
 
 /**
  * Print a locale;
- * @params $id = id of locale;
- * @last edit: $arsalanshah
- * @Reason: Initial;
+ * @param string $id Id of locale;
+ * @param array $args Array;
  *
+ * @return string
  */
 function ossn_print($id = '', $args = array()) {
 		global $Ossn;
@@ -121,14 +118,15 @@ function ossn_load_json_locales() {
  * @return array
  */
 
-function ossn_get_installed_translations() {
+function ossn_get_installed_translations($percentage = true) {
 		global $Ossn;
 		$installed = array();
+		ossn_load_available_languages();
 		
 		foreach($Ossn->locale as $k => $v) {
 				$installed[$k] = ossn_print($k, array(), $k);
 				$completeness  = ossn_get_language_completeness($k);
-				if(($completeness < 100) && ($k != 'en')) {
+				if(($completeness < 100) && ($k != 'en') && $percentage !== false) {
 						$installed[$k] .= " (" . $completeness . "% " . ossn_print('ossn:language:complete') . ")";
 				}
 		}

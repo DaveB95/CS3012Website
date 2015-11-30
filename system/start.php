@@ -1,8 +1,8 @@
 <?php
 /**
- * OpenSource-SocialNetwork
+ * Open Source Social Network
  *
- * @package   OpenSource-SocialNetwork
+ * @packageOpen Source Social Network
  * @author    Informatikon Core Team <info@informatikon.com>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
  * @license   General Public Licence http://www.opensource-socialnetwork.org/licence

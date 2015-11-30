@@ -1,12 +1,12 @@
 <?php
 /**
- * OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 class OssnWall extends OssnObject {
 		/**
@@ -39,9 +39,20 @@ class OssnWall extends OssnObject {
 				$this->subtype           = 'wall';
 				$this->title             = '';
 				
+				$post             = preg_replace('/\t/', ' ', $post);
 				$wallpost['post'] = htmlspecialchars($post, ENT_QUOTES, 'UTF-8');
+				
+				//wall tag a friend , GUID issue #566
 				if(!empty($friends)) {
-						$wallpost['friend'] = $friends;
+						$friend_guids = explode(',', $friends);
+						//reset friends guids
+						$friends      = array();
+						foreach($friend_guids as $guid) {
+								if(ossn_user_by_guid($guid)) {
+										$friends[] = $guid;
+								}
+						}
+						$wallpost['friend'] = implode(',', $friends);
 				}
 				if(!empty($location)) {
 						$wallpost['location'] = $location;
@@ -56,6 +67,12 @@ class OssnWall extends OssnObject {
 								$this->OssnFile->subtype    = 'wallphoto';
 								$this->OssnFile->setFile('ossn_photo');
 								$this->OssnFile->setPath('ossnwall/images/');
+								$this->OssnFile->setExtension(array(
+										'jpg',
+										'png',
+										'jpeg',
+										'gif'
+								));
 								$this->OssnFile->addFile();
 						}
 						$params['subject_guid'] = $this->wallguid;
@@ -98,7 +115,7 @@ class OssnWall extends OssnObject {
 				$this->type       = $type;
 				$this->subtype    = 'wall';
 				$this->owner_guid = $owner;
-				$this->order_by   = 'guid DESC';
+				$this->order_by   = 'o.guid DESC';
 				return $this->getObjectByOwner();
 		}
 		
@@ -113,7 +130,7 @@ class OssnWall extends OssnObject {
 				$this->type       = "user";
 				$this->subtype    = 'wall';
 				$this->owner_guid = $user;
-				$this->order_by   = 'guid DESC';
+				$this->order_by   = 'o.guid DESC';
 				return $this->getObjectByOwner();
 		}
 		
@@ -165,11 +182,13 @@ class OssnWall extends OssnObject {
 		 *
 		 * @return object;
 		 */
-		public function GetPosts() {
-				self::initAttributes();
-				$this->subtype  = 'wall';
-				$this->order_by = 'guid DESC';
-				return $this->getObjectsByTypes();
+		public function GetPosts(array $params = array()) {
+				$default = array(
+						'subtype' => 'wall',
+						'order_by' => 'o.guid DESC'
+				);
+				$options = array_merge($default, $params);
+				return $this->searchObject($options);
 		}
 		/**
 		 * Get user group posts guids
@@ -208,8 +227,7 @@ class OssnWall extends OssnObject {
 		 *
 		 * @return array;
 		 */
-		public function getFriendsPosts() {
-				self::initAttributes();
+		public function getFriendsPosts($params = array()) {
 				$user = ossn_loggedin_user();
 				if(isset($user->guid) && !empty($user->guid)) {
 						$friends      = $user->getFriends();
@@ -224,19 +242,52 @@ class OssnWall extends OssnObject {
 						$friend_guids[] = $user->guid;
 						$friend_guids   = implode(',', $friend_guids);
 						
-						$wheres = "md.guid = e.guid 
-		   				AND  e.subtype='poster_guid'
-		   				AND e.type = 'object'
-		   				AND md.value IN ({$friend_guids})
-		   				AND o.guid = e.owner_guid";
-					
-						$this->OssnDatabase->statement("SELECT o.* FROM ossn_entities as e, 
-					  					ossn_entities_metadata as md, 
-					  					ossn_object as o WHERE({$wheres}) ORDER BY guid DESC;");
-						$this->OssnDatabase->execute();
-						$data = $this->OssnDatabase->fetch(true);
-						if($data){
-							return $data;
+						//prepare default attributes
+						$default  = array(
+								'limit' => false,
+								'offset' => input('offset', '', 1),
+								'page_limit' => ossn_call_hook('pagination', 'page_limit', false, 10), //call hook for page limit
+								'count' => false
+						);
+						$options  = array_merge($default, $params);
+						//get only required result, don't bust your server memory
+						$getlimit = $this->generateLimit($options['limit'], $options['page_limit'], $options['offset']);
+						if($getlimit) {
+								$options['limit'] = $getlimit;
+						}
+						$wheres = array(
+								"md.guid = e.guid",
+								"e.subtype='poster_guid'",
+								"e.type = 'object'",
+								"md.value IN ({$friend_guids})",
+								"o.guid = e.owner_guid"
+						);
+						$vars   = array();
+						
+						$vars['from']     = 'ossn_entities as e, ossn_entities_metadata as md, ossn_object as o';
+						$vars['params']   = array(
+								"o.*"
+						);
+						$vars['wheres']   = array(
+								$this->constructWheres($wheres)
+						);
+						$vars['order_by'] = "o.guid DESC";
+						$vars['limit']    = $options['limit'];
+						
+						//prepare count data;
+						if($options['count'] === true) {
+								unset($vars['params']);
+								unset($vars['limit']);
+								$count           = array();
+								$count['params'] = array(
+										"count(*) as total"
+								);
+								$count           = array_merge($vars, $count);
+								return $this->select($count)->total;
+						}
+						$data = $this->select($vars, true);
+						if($data) {
+								return $data;
 						}
 						
 				}

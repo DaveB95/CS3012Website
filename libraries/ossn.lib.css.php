@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 ossn_register_callback('ossn', 'init', 'ossn_css');
 /**
@@ -15,10 +15,10 @@ ossn_register_callback('ossn', 'init', 'ossn_css');
  * @return void
  */
 function ossn_css() {
-    ossn_register_page('css', 'ossn_css_pagehandler');
-    ossn_add_hook('css', 'register', 'ossn_css_trigger');
-    ossn_extend_view('ossn/site/head', 'ossn_css_site');
-    ossn_extend_view('ossn/admin/head', 'ossn_css_admin');
+		ossn_register_page('css', 'ossn_css_pagehandler');
+		ossn_add_hook('css', 'register', 'ossn_css_trigger');
+		ossn_extend_view('ossn/site/head', 'ossn_css_site');
+		ossn_extend_view('ossn/admin/head', 'ossn_css_admin');
 }
 
 /**
@@ -27,33 +27,33 @@ function ossn_css() {
  * @return false|null
  */
 function ossn_css_pagehandler($css) {
-    if (ossn_site_settings('cache') == 1) {
-        return false;
-    }
-    header("Content-type: text/css");
-    $page = $css[0];
-    if (empty($css[1])) {
-  		header('Content-Type: text/html; charset=utf-8');
-           	ossn_error_page();
-    }
-    if (empty($page)) {
-        $page = 'view';
-    }
-    switch ($page) {
-        case 'view':
-            if (ossn_site_settings('cache') == 1) {
-                return false;
-            }
-            if (ossn_is_hook('css', "register")) {
-                echo ossn_call_hook('css', "register", $css);
-            }
-            break;
-        default:
-		header('Content-Type: text/html; charset=utf-8');
-           	ossn_error_page();
-            break;
-
-    }
+		if(ossn_site_settings('cache') == 1) {
+				return false;
+		}
+		header("Content-type: text/css");
+		$page = $css[0];
+		if(empty($css[1])) {
+				header('Content-Type: text/html; charset=utf-8');
+				ossn_error_page();
+		}
+		if(empty($page)) {
+				$page = 'view';
+		}
+		switch($page) {
+				case 'view':
+						if(ossn_site_settings('cache') == 1) {
+								return false;
+						}
+						if(ossn_is_hook('css', "register")) {
+								echo ossn_call_hook('css', "register", $css);
+						}
+						break;
+				default:
+						header('Content-Type: text/html; charset=utf-8');
+						ossn_error_page();
+						break;
+						
+		}
 }
 
 /**
@@ -65,8 +65,8 @@ function ossn_css_pagehandler($css) {
  * @return void
  */
 function ossn_new_css($name, $file) {
-    global $Ossn;
-    $Ossn->css[$name] = $file;
+		global $Ossn;
+		$Ossn->css[$name] = $file;
 }
 
 /**
@@ -78,21 +78,29 @@ function ossn_new_css($name, $file) {
  * @return void
  */
 function ossn_unlink_new_css($name, $file) {
-    global $Ossn;
-    if(isset($Ossn->css[$name])){
-	   unset($Ossn->css[$name]);	
-	}
+		global $Ossn;
+		if(isset($Ossn->css[$name])) {
+				unset($Ossn->css[$name]);
+		}
 }
 
 /**
  * Get a tag for inserting css
  *
- * @params string $args   array()
+ * @params array $args array()
  *
  * @return string
  */
 function ossn_html_css($args) {
-    return '<link rel="stylesheet" ' . ossn_args($args) . ' type="text/css"/>';
+		if(!is_array($args)) {
+				return false;
+		}
+		$default = array(
+				'rel' => 'stylesheet',
+				'type' => 'text/css'
+		);
+		$args    = array_merge($default, $args);
+		return "\r\n<link " . ossn_args($args) . " />";
 }
 
 /**
@@ -104,8 +112,8 @@ function ossn_html_css($args) {
  * @return void
  */
 function ossn_load_css($name, $type = 'site') {
-    global $Ossn;
-    $Ossn->csshead[$type][] = $name;
+		global $Ossn;
+		$Ossn->csshead[$type][] = $name;
 }
 /**
  * Ossn system unloads css from head
@@ -115,11 +123,11 @@ function ossn_load_css($name, $type = 'site') {
  * @return void
  */
 function ossn_unload_css($name, $type = 'site') {
-    global $Ossn;
-	$css = array_search($name, $Ossn->csshead[$type]);
-    if($css !== false){
-		unset($Ossn->csshead[$type][$css]);
-	}
+		global $Ossn;
+		$css = array_search($name, $Ossn->csshead[$type]);
+		if($css !== false) {
+				unset($Ossn->csshead[$type][$css]);
+		}
 }
 /**
  * Load registered css to system for site
@@ -127,18 +135,32 @@ function ossn_unload_css($name, $type = 'site') {
  * @return html.tag
  */
 function ossn_css_site() {
-    global $Ossn;
-    $url = ossn_site_url();
-    if (isset($Ossn->csshead['site'])) {
-        foreach ($Ossn->csshead['site'] as $css) {
-            $href = "{$url}css/view/{$css}.css";
-            if (ossn_site_settings('cache') == 1) {
-                $href = "{$url}cache/css/view/{$css}.css";
-            }
-            echo ossn_html_css(array('href' => $href));
-        }
-    }
-
+		global $Ossn;
+		$url      = ossn_site_url();
+		//load external css
+		$external = $Ossn->cssheadExternal['site'];
+		if(!empty($external)) {
+				foreach($external as $item) {
+						echo ossn_html_css(array(
+								'href' => $Ossn->cssExternal[$item]
+						));
+				}
+		}
+		
+		//load internal css
+		if(isset($Ossn->csshead['site'])) {
+				foreach($Ossn->csshead['site'] as $css) {
+						$href = "{$url}css/view/{$css}.css";
+						if(ossn_site_settings('cache') == 1) {
+								$cache = ossn_site_settings('last_cache');
+								$href  = "{$url}cache/css/{$cache}/view/{$css}.css";
+						}
+						echo ossn_html_css(array(
+								'href' => $href
+						));
+				}
+		}
+		
 }
 
 /**
@@ -147,17 +169,31 @@ function ossn_css_site() {
  * @return html.tag
  */
 function ossn_css_admin() {
-    global $Ossn;
-    $url = ossn_site_url();
-    if (isset($Ossn->csshead['admin'])) {
-        foreach ($Ossn->csshead['admin'] as $css) {
-            $href = "{$url}css/view/{$css}.css";
-            if (ossn_site_settings('cache') == 1) {
-                $href = "{$url}cache/css/view/{$css}.css";
-            }
-            echo ossn_html_css(array('href' => $href));
-        }
-    }
+		global $Ossn;
+		$url      = ossn_site_url();
+		//load external css
+		$external = $Ossn->cssheadExternal['admin'];
+		if(!empty($external)) {
+				foreach($external as $item) {
+						echo ossn_html_css(array(
+								'href' => $Ossn->cssExternal[$item]
+						));
+				}
+		}
+		
+		//load internal css
+		if(isset($Ossn->csshead['admin'])) {
+				foreach($Ossn->csshead['admin'] as $css) {
+						$href = "{$url}css/view/{$css}.css";
+						if(ossn_site_settings('cache') == 1) {
+								$cache = ossn_site_settings('last_cache');
+								$href  = "{$url}cache/css/{$cache}/view/{$css}.css";
+						}
+						echo ossn_html_css(array(
+								'href' => $href
+						));
+				}
+		}
 }
 
 /**
@@ -166,19 +202,69 @@ function ossn_css_admin() {
  * @return string|false
  */
 function ossn_css_trigger($hook, $type, $value, $params) {
-    global $Ossn;
-    if (isset($params[1]) && substr($params[1], '-4') == '.css') {
-        $params[1] = str_replace('.css', '', $params[1]);
-        if (isset($Ossn->css[$params[1]])) {
-            $file = ossn_view($Ossn->css[$params[1]]);
-            $extended = ossn_fetch_extend_views("css/{$params[1]}");
-            $data = array(
-                $file,
-                $extended
-            );
-            return implode(' ', $data);
-        }
-    }
-    return false;
+		global $Ossn;
+		if(isset($params[1]) && substr($params[1], '-4') == '.css') {
+				$params[1] = str_replace('.css', '', $params[1]);
+				if(isset($Ossn->css[$params[1]])) {
+						$file     = ossn_plugin_view($Ossn->css[$params[1]]);
+						$extended = ossn_fetch_extend_views("css/{$params[1]}");
+						$data     = array(
+								$file,
+								$extended
+						);
+						return implode(' ', $data);
+				}
+		}
+		return false;
 }
-
+/**
+ * Register a new external css to system
+ *
+ * @param string $name The name of the css
+ *               $file  complete url path to css file
+ *
+ * @return void
+ */
+function ossn_new_external_css($name, $file, $type = true) {
+		global $Ossn;
+		if($type) {
+				$Ossn->cssExternal[$name] = ossn_site_url($file);
+		} else {
+				$Ossn->cssExternal[$name] = $file;
+		}
+}
+/**
+ * Remove a external css from system
+ *
+ * @param string $name The name of the css
+ *               $file  complete url path to css file
+ *
+ * @return void
+ */
+function ossn_unlink_external_css($name) {
+		global $Ossn;
+		unset($Ossn->cssExternal[$name]);
+}
+/**
+ * Load registered css to system for site
+ *
+ * @return html.tag
+ */
+function ossn_load_external_css($name, $type = 'site') {
+		global $Ossn;
+		$Ossn->cssheadExternal[$type][] = $name;
+}
+/**
+ * Ossn system unloads css from head
+ *
+ * @param string $name The name of the css
+ *
+ * @return void
+ */
+function ossn_unload_external_css($name, $type = 'site') {
+		global $Ossn;
+		$css = array_search($name, $Ossn->cssheadExternal[$type]);
+		if($css !== false) {
+				unset($Ossn->cssheadExternal[$type][$css]);
+		}
+}

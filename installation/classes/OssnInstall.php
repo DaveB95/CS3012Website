@@ -1,13 +1,13 @@
 <?php
 
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 class OssnInstallation {
     /**
@@ -69,7 +69,22 @@ class OssnInstallation {
         }
         return false;
     }
-
+	/**
+	 * Check if the ZipArchive class exists or not
+	 *
+	 * @return boolean
+	 */
+	public static function isZipClass(){
+		return class_exists('ZipArchive');
+	}
+	/**
+	 * Check if allow_url_fopen is available or not
+	 *
+	 * @return boolean
+	 */
+	public static function allowUrlFopen(){
+		return ini_get('allow_url_fopen');
+	}
     /**
      * Check if php is > than 5.4
      * @last edit: $arsalanshah
@@ -77,8 +92,9 @@ class OssnInstallation {
      *
      */
     public static function isPhp() {
-		$phpversion = substr(PHP_VERSION, 0, 6);
-        if ($phpversion >= 5.4 && $phpversion < 5.6) {
+	$phpversion = substr(PHP_VERSION, 0, 6);
+        //$phpversion < 5.6 , works fine with php 5.6
+        if ($phpversion >= 5.4) {
             return true;
         }
         return false;

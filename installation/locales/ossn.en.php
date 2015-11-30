@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 
@@ -16,7 +16,7 @@ $englsih = array(
 	'ossn:installation' => 'Installation',
 	'ossn:check' => 'Validate',
 	'ossn:installed' => 'Installed',
-	'ossn:installed:message' => 'Open Source Social Network has been installed. After you are finished, please remove the installation directory.',
+	'ossn:installed:message' => 'Open Source Social Network has been installed.',
     'ossn:prerequisites' => 'Installation prerequisites',
     'ossn:settings' => 'Server Settings',
     'ossn:dbsettings' => 'Database',
@@ -66,6 +66,12 @@ $englsih = array(
     'ossn:install:finish' => 'Finish',
 	
 	'fields:require' => 'All fields are required!',
+	
+	'ossn:install:allowfopenurl' => 'PHP allow_url_fopen ENABLED',
+	'ossn:install:allowfopenurl:error' => 'PHP allow_url_fopen is required',
+	
+	'ossn:install:ziparchive' => 'PHP ZipArchive ENABLED',
+	'ossn:install:ziparchive:error' => 'PHP ZipArchive EXTENSION REQUIRED',
 );
 
 ossn_installation_register_languages($englsih);

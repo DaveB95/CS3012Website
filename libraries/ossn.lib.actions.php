@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 /**
@@ -49,6 +49,29 @@ function ossn_action($action) {
 			$params['action'] = $action;
             ossn_trigger_callback('action', 'load', $params);
             include_once($Ossn->action[$action]);
+			if(ossn_is_xhr()){
+				header('Content-Type: application/json');
+				$vars = array();
+				if(isset($_SESSION['ossn_messages']['success']) 
+					&& !empty($_SESSION['ossn_messages']['success'])){
+						$vars['success'] = $_SESSION['ossn_messages']['success'];
+				}
+				//danger = error bootstrap
+				if(isset($_SESSION['ossn_messages']['danger']) 
+					&& !empty($_SESSION['ossn_messages']['danger'])){
+						$vars['error'] = $_SESSION['ossn_messages']['danger'];
+				}
+				if(isset($Ossn->redirect) && !empty($Ossn->redirect)){
+					$vars['redirect'] = $Ossn->redirect;
+				}
+				if(isset($Ossn->ajaxData) && !empty($Ossn->ajaxData)){
+					$vars['data'] = $Ossn->ajaxData;
+				}
+				unset($_SESSION['ossn_messages']);
+				if(!empty($vars)){
+					echo json_encode($vars);
+				}
+			}
         }
     } else {
         ossn_error_page();

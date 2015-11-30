@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 $VIEW = new stdClass;
@@ -89,8 +89,8 @@ function ossn_args(array $attrs) {
  */
 function ossn_extend_view($views, $file) {
     global $VIEW;
-    $result = $VIEW->register[$views][] = $file;
-    return $result;
+    $VIEW->register[$views][] = $file;
+	return true;
 }
 
 /**
@@ -108,7 +108,7 @@ function ossn_fetch_extend_views($layout, $params = array()) {
     if (isset($VIEW->register[$layout]) && !empty($VIEW->register[$layout])) {
         foreach ($VIEW->register[$layout] as $file) {
             if (!function_exists($file)) {
-                $fetch[] = ossn_view($file, $params);
+                $fetch[] = ossn_plugin_view($file, $params);
             } else {
                 $fetch[] = call_user_func($file, ossn_get_context(), $params, current_url());
             }
@@ -142,8 +142,8 @@ function ossn_remove_extend_view($layout) {
  */
 function ossn_add_context($context) {
     global $VIEW;
-    $add = $VIEW->context = $context;
-    return $add;
+    $VIEW->context = $context;
+	return true;
 }
 
 /**
@@ -190,7 +190,7 @@ function ossn_set_page_layout($layout, $params = array()) {
     if (!empty($layout)) {
         $theme = new OssnThemes;
         $active_theme = $theme->getActive();
-        return ossn_view("themes/{$active_theme}/page/layout/{$layout}", $params);
+        return ossn_plugin_view("theme/page/layout/{$layout}", $params);
     }
 }
 
@@ -207,9 +207,7 @@ function ossn_set_page_layout($layout, $params = array()) {
 function ossn_view_page($title, $content, $page = 'page') {
     $params['title'] = $title;
     $params['contents'] = $content;
-    $theme = new OssnThemes;
-    $active_theme = $theme->getActive();
-    return ossn_view("themes/{$active_theme}/page/{$page}", $params);
+    return ossn_plugin_view("theme/page/{$page}", $params);
 }
 
 /**
@@ -218,11 +216,17 @@ function ossn_view_page($title, $content, $page = 'page') {
  * @return string
  */
 function ossn_default_theme() {
-    $theme = new OssnThemes;
-    $active_theme = $theme->getActive();
-    return ossn_route()->themes . $theme->getActive() . '/';
+    return ossn_route()->themes . ossn_site_settings('theme') . '/';
 }
-
+/**
+ * Activated theme URL
+ *
+ * @return string
+ */
+function ossn_theme_url(){
+	$default = ossn_site_settings('theme');
+	return ossn_site_url("themes/{$default}/");
+}
 /**
  * Ossn view form
  *
@@ -232,22 +236,18 @@ function ossn_default_theme() {
 function ossn_view_form($name, $args = array(), $type = 'core') {
     $args['name'] = $name;
     $args['type'] = $type;
-    return ossn_view("system/templates/output/form", $args);
+    return ossn_plugin_view("output/form", $args);
 }
 
 /**
  * Ossn view widget
  *
- * @param string $name
- * @param string $title
- * @return mix data
+ * @param array $params A options
+ *
+ * @return string
  */
-function ossn_view_widget($name, $title, $contents) {
-    $theme = new OssnThemes;
-    $active_theme = $theme->getActive();
-    $widget['title'] = $title;
-    $widget['contents'] = $contents;
-    return ossn_view("themes/{$active_theme}/widgets/{$name}", $widget);
+function ossn_view_widget(array $params = array()) {
+    return ossn_plugin_view("widget/view", $params);
 }
 /**
  * View a template
@@ -261,6 +261,31 @@ function ossn_view_widget($name, $title, $contents) {
  */
 function ossn_view_template($template = '', array $params){
 	if(!empty($template)){
-		return ossn_view("system/templates/{$template}", $params);
+		return ossn_plugin_view("{$template}", $params);
 	}
+}
+/**
+ * Create a pagiantion using count and page limit
+ *
+ * @param integer $count total entities/objects
+ * @param integer $page_limit Number of entities/objects per page
+ *
+ * @return false|mixed data
+ */
+function ossn_view_pagination($count = false, $page_limit = 10){
+	$page_limit = ossn_call_hook('pagination', 'page_limit', false, $page_limit);
+	if(!empty($count) && !empty($page_limit)){
+		$pagination = new OssnPagination;
+	
+		$params = array();
+		$params['limit'] = $count;
+		$params['page_limit']  = $page_limit;
+		
+		$offset = input('offset');
+		if(empty($offset)){
+			ossn_set_input('offset', 1);
+		}
+		return $pagination->pagination($params);
+	}
+	return false;
 }

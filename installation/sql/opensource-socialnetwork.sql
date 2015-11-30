@@ -137,8 +137,8 @@ CREATE TABLE IF NOT EXISTS `ossn_object` (
   `owner_guid` bigint(20) NOT NULL,
   `type` varchar(20) NOT NULL,
   `time_created` int(11) NOT NULL,
-  `title` longtext NOT NULL,
-  `description` text NOT NULL,
+  `title` text NOT NULL,
+  `description` longtext NOT NULL,
   `subtype` text NOT NULL,
   PRIMARY KEY (`guid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `ossn_site_settings` (
   `name` text NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`setting_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `ossn_site_settings`
@@ -182,9 +182,11 @@ INSERT INTO `ossn_site_settings` (`setting_id`, `name`, `value`) VALUES
 (4, 'cache', '0'),
 (5, 'owner_email', '<<owner_email>>'),
 (6, 'notification_email', '<<notification_email>>'),
-(7, 'upgrades', '["1410545706.php","1411396351.php", "1412353569.php","1415553653.php","1415819862.php", "1423419053.php", "1423419054.php"]'),
+(7, 'upgrades', '["1410545706.php","1411396351.php", "1412353569.php","1415553653.php","1415819862.php", "1423419053.php", "1423419054.php", "1439295894.php", "1440716428.php", "1440867331.php", "1440603377.php", "1443202118.php", "1443211017.php", "1443545762.php", "1443617470.php", "1446311454.php", "1448807613.php"]'),
 (9, 'display_errors', 'off'),
-(10, 'site_key', '<<screat>>');
+(10, 'site_key', '<<screat>>'),
+(11, 'last_cache', ''),
+(12, 'site_version', '3.9');
 
 
 -- --------------------------------------------------------
@@ -205,5 +207,6 @@ CREATE TABLE IF NOT EXISTS `ossn_users` (
   `last_login` int(11) NOT NULL,
   `last_activity` int(11) NOT NULL,
   `activation` text,
+  `time_created` int(11) NOT NULL,
   PRIMARY KEY (`guid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

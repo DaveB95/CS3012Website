@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 $entity = ossn_user_by_username(input('username'));
 if(!$entity){
@@ -90,18 +90,23 @@ if (!empty($password)) {
         $salt
     );
 }
-
+$language = input('language');
+$success  = ossn_print('user:updated');
+if(!empty($language) && in_array($language, ossn_get_available_languages())){
+	$lang = $language;
+} else {
+	$lang = 'en';
+}
 //save
 if ($OssnDatabase->update($params)) {
     //update entities
     $guid = $user_get->guid;
     if (!empty($guid)) {
-        $user_get->owner_guid = $guid;
-        $user_get->type = 'user';
         $user_get->data->gender = $user['gender'];
         $user_get->data->birthdate = $user['birthdate'];
+		$user_get->data->language = $lang;
         $user_get->save();
     }
-    ossn_trigger_message(ossn_print('user:updated'), 'success');
+    ossn_trigger_message($success, 'success');
     redirect(REF);
 } 

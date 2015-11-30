@@ -1,17 +1,17 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 $en = array(
 	'home' => 'Home',
-	'site:index' => 'Welcome to website',
+	'site:index' => 'Welcome!',
 	'news:feed' => 'News Feed',
 	'new:feed' => 'News Feed',
 	'photos:ossn' => 'Photos',
@@ -21,10 +21,10 @@ $en = array(
 	'create:account' => 'Create an account',
 	'its:free' => "It's free and always will be.",
 	
-	'register:ok:message' => "Your account has been registered. We have sent you an account activation email. If you didn't receive the email, please check your spam/junk folder.",
+	'register:ok:message' => "Your account has been registered. An activation email has been sent to your mailbox. If you didn't receive the email, please check your spam/junk folder.",
 	
 	'copyright' => '&copy; COPYRIGHT',
-	'powered' => 'Powered by the Open Source Social Network',
+	'powered' => 'Powered by the Open Source Social Network.',
 	
 	'name' => 'Name',
 	'birthdate' => 'Birthdate',
@@ -42,14 +42,14 @@ $en = array(
 	'account:create:notice' => 'By clicking Create an account, you agree to our',
 	'gender' => 'Gender',
 	
-	'acount:settings' => 'Account Settings',
+	'account:settings' => 'Account Settings',
 	'page:error' => 'Page Not Found!',
-	'page:error:text' => 'Opps! The Page you requested was not found!',
+	'page:error:text' => 'The page you requested is unavailable or may have been deleted.',
 	'page:error:heading' => '404',
 	
 	'search:users' => 'People',
-	'admin:logout' => 'Logout',
-	'logout' => 'Logout',
+	'admin:logout' => 'Log out',
+	'logout' => 'Log out',
 	
 	'ossn:like:this' => '%s liked this',
 	'ossn:like:you:and:this' => 'You and %s liked this',
@@ -82,7 +82,7 @@ $en = array(
 	'admin:users' => 'List Users',
 	'admin:add:user' => 'Add User',
 	'admin:user:deleted' => 'User has been deleted!',
-	'admin:user:delete:error' => 'Cannot delete user! Please try again later.',
+	'admin:user:delete:error' => 'Unable to delete user. Please try again later.',
 	
 	'type' => 'Type',
 	'normal' => 'Normal',
@@ -90,8 +90,8 @@ $en = array(
 	
 	'lastlogin' => 'Last Login',
 	
-	'my:version' => 'My Ossn Version',
-	'online:users' => 'Online Users',
+	'my:version' => 'My OSSN Version',
+	'online:users' => 'Users Online',
 	'themes' => 'Themes',
 	'users' => 'Users',
 	'components' => 'Components',
@@ -111,11 +111,11 @@ Please confirm your email address by clicking on the link below:
 
 %s
 
-If you can't click on the link, copy and paste it to your browser manually.
+You may copy and paste the address to your browser manually in case the link does not work.
 
 %s",
 	'user:friends' => 'Friends',
-	'user:account:validated' => 'Account has been successfully validated!',
+	'user:account:validated' => 'Account has been validated successfully!',
 	'user:account:validate:fail' => 'Cannot validate account! Please try again later.',
 	
 	'cache:enabled' => 'Cache successfully enabled!',
@@ -125,7 +125,7 @@ If you can't click on the link, copy and paste it to your browser manually.
 	
 	'cache:1' => 'Enabled',
 	'cache:0' => 'Disabled',
-	'cache:notice' => 'Cache will store CSS and JS in cache file and help your site load faster.',
+	'cache:notice' => 'Stores CSS and Javascript files in a cache to improve site performance.',
 	
 	'theme:install:notice' => 'Upload a valid .zip theme package.',
 	'com:install:notice' => 'Upload a valid .zip component package.',
@@ -133,8 +133,8 @@ If you can't click on the link, copy and paste it to your browser manually.
 	'login:error' => 'Invalid username or passsword!',
 	'login:error:sub' => "We couldn't log you in. Please check your username or password and try again.",
 	'login:success' => 'You are now logged in!',
-	'com:installed' => 'Component has been installed!',
-	'com:install:error' => 'Cannot install component! Make sure it is a valid package.',
+	'com:installed' => 'Component has been uploaded to your components list, you can now enable it from components page.',
+	'com:install:error' => 'Cannot upload component, make sure it is a valid package.',
 	'settings:saved' => 'Settings saved',
 	'com:deleted' => 'Component has been deleted!',
 	'com:delete:error' => 'Cannot delete component! Please try again later.',
@@ -144,19 +144,19 @@ If you can't click on the link, copy and paste it to your browser manually.
 	'theme:delete:active' => 'Cannot delete active theme.',
 	'theme:deleted' => 'Theme has been deleted.',
 	'theme:delete:error' => 'Cannot delete theme! Please try again later.',
-	'theme:enabled' => 'Successfully enabled!',
-	'theme:installed' => 'Theme has been installed!',
-	'theme:install:error' => 'Cannot install theme! Make sure it is a valid theme.',
+	'theme:enabled' => 'Theme has been successfully enabled!',
+	'theme:installed' => 'Theme has been successfully installed!',
+	'theme:install:error' => 'Unable to install theme. Make sure it is compatible with the OSSN version you are using.',
 	
 	'fields:require' => 'All fields are required!',
-	'username:error' => 'Username is incorrect.',
+	'username:error' => 'Username is invalid.',
 	'password:error' => 'Password must be more than 5 characters.',
 	'account:created' => 'Your account has been created.',
-	'account:create:error:admin' => 'Cannot register account! Please try again later.',
+	'account:create:error:admin' => 'Account registration failed! Please try again later.',
 	'user:updated' => 'User has been updated!',
 	'logged:out' => 'You are now logged out!',
-	'username:inuse' => 'Username already exist! Please select a different username.',
-	'email:inuse' => 'Email address already exist! Please try another email address.',
+	'username:inuse' => 'The following username has already been used. Please select a different username.',
+	'email:inuse' => 'The email address you used already exists in our database. Please try another email address.',
 	'email:invalid' => 'Email address is invalid! Make sure the email address you entered is correct.',
 	'email:error:matching' => "Email addresses do not match.",
 	'account:created:email' => "Your account has been registered! We have sent you an account activation email. If you didn't receive the email, please check your spam/junk folder",
@@ -177,7 +177,7 @@ If you can't click on the link, copy and paste it to your browser manually.
 	'no:friends' => 'No Friends',
 	'settings' => 'Settings',
 	'ossn:add:friend:error' => 'Cannot add friend!',
-	'ossn:friend:request:submitted' => 'Your friend request was submitted successfully!',
+	'ossn:friend:request:submitted' => 'Your friend request has been sent!',
 	
 	/* Upgrades */
 	'upgrade:file:load:error' => 'Cannot load upgrade file!',
@@ -237,7 +237,7 @@ Please click the link below to reset password or copy the link and paste into yo
 	'upload:file:error:extension' => 'Cannot save the uploaded file.',
 	'upload:file:error:unknown' => 'The file upload failed.',
 	
-	'ossn:post:size:exceed' => 'The action you requested exceed the size limit.',
+	'ossn:post:size:exceed' => 'The action you requested exceeds the size limit.',
 	
 	'admin:components' => 'Components',
 	'admin:themes' => 'Themes',
@@ -276,6 +276,28 @@ Please click the link below to reset password or copy the link and paste into yo
 	'admin:users:unvalidated' => 'Unvalidated Users',
 	'admin:user:validated' => 'User validated',
 	'admin:user:validate:error' => 'Could not validate user.',
+	
+	//v3.0
+	//admin
+	'my:files:version' => 'My Ossn Files Version',
+	'cache:flush:error' => 'Can not flush cache, make sure cache is enabled in cache settings',
+	'cache:flushed' => 'Cache flushed successfully',
+	'ossn:version' => 'OSSN version', 
+	'php:extension' => 'PHP extension',
+	'php:version' => 'PHP version',
+	'php:function' => 'PHP function',
+	'admin:old:com' => "Your ossn_com.xml file is based on old version of Ossn. Please update '%s' component.",
+	'admin:old:theme' => "Your ossn_theme.xml file is based on old version of Ossn. Please update '%s' theme.",
+	'admin:button:disabled' => 'Disabled',
+	'admin:flush:cache' => 'Flush Cache',
+	'admin:com:version' => 'Version',
+	'admin:com:author' => 'Author',
+	'admin:com:author:url' => 'Author URL',
+	'admin:com:license' => 'License',
+	'admin:com:requirements' => 'Requirements',
+	'admin:com:availability' => 'Availability',
+	'ossn:exception:make:sure' => 'Are you sure?',
+	
 	/*
 	 * List of ISO 639-1 language codes
 	 * http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes

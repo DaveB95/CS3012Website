@@ -2,7 +2,7 @@
 /**
  * Open Source Social Network
  *
- * @package   Open Source Social Network
+ * @packageOpen Source Social Network
  * @author    Open Social Website Core Team <info@informatikon.com>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
  * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
@@ -17,5 +17,10 @@ $en = array(
     'save:position' => 'Save Position',
 	'ossn:profile:picture:updated' => 'Changed profile picture.',
 	'ossn:profile:cover:picture:updated' => 'Changed profile cover.',
+	'language' => 'Language',
+
+    'edit:profile' => 'Edit Profile',
+    'reposition:cover' => 'Reposition',
+    'profile:photos' => 'Profile Photos',	
 );
 ossn_register_languages('en', $en); 

@@ -1,12 +1,12 @@
 <?php
 /**
- *  OpenSource-SocialNetwork
+ *  Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 class OssnBase {
     /**
@@ -34,7 +34,6 @@ class OssnBase {
     /**
      * Get a parameter from object
      *
-     * @params = parameter
      * @param string $param
      *
      * @return string;
@@ -45,4 +44,17 @@ class OssnBase {
         }
         return false;
     }	
+    /**
+     * isParam
+     *
+     * @param string $param
+     *
+     * @return string;
+     */
+    public function isParam($param) {
+        if (!empty($param) && isset($this->$param)) {
+            return true;
+        }
+        return false;
+    }		
 }//CLASS

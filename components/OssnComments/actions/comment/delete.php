@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 $comment = input('comment');
 $delete = new OssnComments;
@@ -20,11 +20,12 @@ if ($comment->type == 'comments:post') {
         $group = ossn_get_group_by_guid($post->owner_guid);
     }
 }
+$user = ossn_loggedin_user();
 if ($comment->type == 'comments:entity') {
     $entity = ossn_get_entity($comment->subject_guid);
 }
-//check if comment is based on entity then check entity ownerguid and if logged in user is entity owner delete comment
-if (($comment->owner_guid == ossn_loggedin_user()->guid) || ($group->owner_guid == ossn_loggedin_user()->guid) || ($entity->owner_guid == ossn_loggedin_user()->guid) || ossn_isAdminLoggedin()) {
+//Post owner can not delete others comments #607
+if (($comment->owner_guid == $user->guid) || ($post->type == 'user' && $user->guid == $post->owner_guid) || ($group->owner_guid == $user->guid) || ($entity->owner_guid == $user->guid) || ossn_isAdminLoggedin()) {
     if ($delete->deleteComment($comment->getID())) {
         if (ossn_is_xhr()) {
             echo 1;

@@ -1,19 +1,19 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 /**
  * Ossn Convert arrays to Object
  *
- * @params $array => arrays
- *         $class => object class ,else it object will be created in stdClass
+ * @param array $array Arrays
+ * @param string $class class name ,else it will be object of stdClass
  *
  * @return object
  */
@@ -39,7 +39,7 @@ function arrayObject($array, $class = 'stdClass') {
  * Sometimes php can't get object class ,
  * so we need to make sure that object have class name
  *
- * @params $object => object
+ * @param object $object Object
  *
  * @return object
  */
@@ -73,6 +73,7 @@ function ossn_route() {
         'upgrade' => "$root/upgrade/",
         'cache' => "{$root}/cache/",
         'js' => "$root/javascripts/",
+	'system' => "$root/system/",
 	'components' => "$root/components",
     );
     return arrayObject($defaults);
@@ -81,7 +82,7 @@ function ossn_route() {
 /**
  * Get current url
  *
- * @params $params => object
+ * @param string  $uport Want port or not? default will be disable
  *
  * @return object
  */

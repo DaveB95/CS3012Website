@@ -1,12 +1,12 @@
 <?php
 /**
- *    OpenSource-SocialNetwork
+ * Open Source Social Network
  *
  * @package   (Informatikon.com).ossn
- * @author    OSSN Core Team <info@opensource-socialnetwork.com>
+ * @author    OSSN Core Team <info@opensource-socialnetwork.org>
  * @copyright 2014 iNFORMATIKON TECHNOLOGIES
- * @license   General Public Licence http://opensource-socialnetwork.com/licence
- * @link      http://www.opensource-socialnetwork.com/licence
+ * @license   General Public Licence http://www.opensource-socialnetwork.org/licence
+ * @link      http://www.opensource-socialnetwork.org/licence
  */
 
 echo '<div><div class="layout-installation">';
@@ -45,9 +45,9 @@ echo '<h2>' . ossn_installation_print('site:settings') . '</h2>';
         <label> <?php echo ossn_installation_print('ossn:datadir'); ?> </label>
         <input type="text" name="datadir" value="<?php echo OssnInstallation::DefaultDataDir(); ?>"/>
     </div>
-
-    <input type="submit" value="<?php echo ossn_installation_print('ossn:install:install'); ?>" class="button-blue primary">
-
+	<div style="display:block;margin-top:10px;">
+	    <input type="submit" value="<?php echo ossn_installation_print('ossn:install:install'); ?>" class="button-blue primary">
+	</div>
 </form>
 
 
