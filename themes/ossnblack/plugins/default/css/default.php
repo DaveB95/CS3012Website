@@ -116,7 +116,7 @@ margin-top: 15px;
 .ossn-home-container {
 background:url('<?php echo ossn_theme_url(); ?>images/home-new-bg.jpg') repeat-x;
 min-height:465px;
-color:#A66E00;
+color:#fff;
 }
 .ossn-home-container a{
 color:#fff !important;
@@ -149,7 +149,7 @@ width: 376px;
 font-size: 30px;
 }
 .home-right-contents .h1-bottom {
-font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+font-family:"Helvetica",Helvetica,sans-serif;
 font-size: 22px;
 font-weight: normal;
 line-height: 28px;
@@ -245,7 +245,7 @@ display:inline-block;
 Topbar
 *********************/
 .ossn-topbar {
-background:linear-gradient(to bottom, #ffffff, #000000);
+background:#B62618;
 height:42px;
 position: fixed;
 left: 0;
@@ -489,7 +489,7 @@ width:17px;
 height:17px;
 }
 .ossn-icon-access-friends {
-background:url('<?php echo ossn_theme_url(); ?>images/icons/access/friends.png') no-repeat;
+background:url('<?php echo ossn_theme_url(); ?>images/icons/access/handshake.png') no-repeat;
 width:12px;
 height:12px;
 }
