@@ -10,14 +10,14 @@
 */
 .ossn-wall-container {
 	width: 526px;
-	background: #FFF;
+	background: #B62618;
 	border: 1px solid;
 	border-color: #E5E6E9 #DFE0E4 #D0D1D5;
 	-webkit-border-radius: 3px;
 }
 
 .ossn-wall-container .controls {
-	background-color: #F6F7F8;
+	background-color: #B62618;
 	border-top: 1px solid #E9EAED;
 	height: 40px;
 	width: 100%;
@@ -128,7 +128,7 @@
 
 .ossn-button-submit-b {
 	cursor: pointer;
-	border: 1px solid #3d5e74;
+	border: 1px solid #FFFFFF;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
@@ -140,26 +140,16 @@
 	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
 	font-weight: bold;
 	color: #FFFFFF;
-	background-color: #507C99;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#507C99), to(#3C5D73));
-	background-image: -webkit-linear-gradient(top, #507C99, #3C5D73);
-	background-image: -moz-linear-gradient(top, #507C99, #3C5D73);
-	background-image: -ms-linear-gradient(top, #507C99, #3C5D73);
-	background-image: -o-linear-gradient(top, #507C99, #3C5D73);
-	background-image: linear-gradient(to bottom, #507C99, #3C5D73);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#507C99, endColorstr=#3C5D73);
+	background-color: #000000;
+	background-image: #000000;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#000000, endColorstr=#000000);
 }
 
 .ossn-button-submit-b:hover {
-	border: 1px solid #2d4656;
-	background-color: #38586B;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#38586B), to(#2F495A));
-	background-image: -webkit-linear-gradient(top, #38586B, #2F495A);
-	background-image: -moz-linear-gradient(top, #38586B, #2F495A);
-	background-image: -ms-linear-gradient(top, #38586B, #2F495A);
-	background-image: -o-linear-gradient(top, #38586B, #2F495A);
-	background-image: linear-gradient(to bottom, #38586B, #2F495A);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#38586B, endColorstr=#2F495A);
+	border: 1px solid #FFFFFF;
+	background-color: #B6B6B6;
+	background-image: #B6B6B6;
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#B6B6B6, endColorstr=#B6B6B6);
 }
 
 .ossn-wall-post {
