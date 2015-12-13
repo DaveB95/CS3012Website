@@ -1,0 +1,1 @@
+<iframe src="https://www.google.com/calendar/embed?showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=2&amp;hl=hu&amp;bgcolor=%23E9EAED&amp;src=ifj.molnar.vilmos%40gmail.com&amp;color=%2329527A&amp;ctz=Europe%2FBudapest" style=" border-width:0 " width="100%" height="600" frameborder="0" scrolling="no"></iframe>
