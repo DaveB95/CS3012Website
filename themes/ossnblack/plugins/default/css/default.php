@@ -96,7 +96,7 @@ background:#222222;
 height:90px;
 }
 .logo-second {
-background:url('<?php echo ossn_theme_url(); ?>images/bar_chart.png') no-repeat;
+background:url('<?php echo ossn_theme_url(); ?>images/bearded_man.png') no-repeat;
 height:28px;
 width:28px;
 }
@@ -737,7 +737,8 @@ background:#eee;
 }
 .ossn-all-comments {
 padding: 4px;
-margin-left: 5px
+margin-left: 5px;
+color: #B86262;
 }
 .ossn-all-comments a{
 font-size:12px;
