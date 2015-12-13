@@ -179,7 +179,7 @@ width: 108px;
 margin-right: 5px;
 }
 .newseed-uinfo .name a{
-color:#141823;
+color:#FFFFFF;
 display:block;
 font-size: 12px;
 padding: 1px;
