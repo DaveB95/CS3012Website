@@ -10,7 +10,7 @@
  */
 
 $en = array(
-	'home' => 'Home',
+	'home' => 'Noticeboard',
 	'site:index' => 'Welcome!',
 	'news:feed' => 'Company Noticeboard',
 	'new:feed' => 'Company Noticeboard',
@@ -171,13 +171,13 @@ You may copy and paste the address to your browser manually in case the link doe
 	'privacy:public:note' => 'Everyone on this site can see this.',
 	'privacy:friends:note' => 'Only your colleagues can see this.',
 	
-	'add:friend' => 'Add friend',
+	'add:friend' => 'Add colleague',
 	'cancel:request' => 'Cancel Request',
-	'remove:friend' => 'Unfriend',
+	'remove:friend' => 'Remove colleague',
 	'no:friends' => 'No Colleagues',
 	'settings' => 'Settings',
-	'ossn:add:friend:error' => 'Cannot add friend!',
-	'ossn:friend:request:submitted' => 'Your friend request has been sent!',
+	'ossn:add:friend:error' => 'Cannot add colleague!',
+	'ossn:friend:request:submitted' => 'Your colleague add request has been sent!',
 	
 	/* Upgrades */
 	'upgrade:file:load:error' => 'Cannot load upgrade file!',
