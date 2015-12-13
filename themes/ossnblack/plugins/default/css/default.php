@@ -1323,12 +1323,6 @@ margin-left: 6px;
 margin-right: 6px;
 }
 
-background: #FFF;
-border: 1px solid;
-border-color: #E5E6E9 #DFE0E4 #D0D1D5;
--webkit-border-radius: 3px;
-vertical-align: top;
-}
 .ossn-layout-newsfeed .ossn-inner {
 width: 970px;
 }
