@@ -11,7 +11,7 @@
 ?>
 <style>
     body {
-        background: #fff;
+        background: #FFA900;
     }
 </style>
 <div class="ossn-layout-media"><br/>

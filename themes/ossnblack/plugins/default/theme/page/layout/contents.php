@@ -12,7 +12,7 @@ if (!isset($params['background'])) {
     $params['background'] = '';
 }
 if ($params['background'] !== false) {
-    echo '<style>body { background:#FDFDFD; }</style>';
+    echo '<style>body { background:#A66E00; }</style>';
 }
 echo '<div class="ossn-layout-contents">';
 echo $params['content'];

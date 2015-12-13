@@ -47,5 +47,5 @@ function ossn_three_head(){
 	return implode('', $head);
 }
 function ossntheme_black_group_background($hook, $type, $return, $params) {
-    return '#FDFDFD';
+    return '#A66E00';
 }

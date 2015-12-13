@@ -116,7 +116,7 @@ margin-top: 15px;
 .ossn-home-container {
 background:url('<?php echo ossn_theme_url(); ?>images/home-new-bg.jpg') repeat-x;
 min-height:465px;
-color:#fff;
+color:#A66E00;
 }
 .ossn-home-container a{
 color:#fff !important;
@@ -245,7 +245,7 @@ display:inline-block;
 Topbar
 *********************/
 .ossn-topbar {
-background:linear-gradient(to bottom, #333, #000);
+background:linear-gradient(to bottom, #ffffff, #000000);
 height:42px;
 position: fixed;
 left: 0;
@@ -513,14 +513,14 @@ Menu
 margin-top:10px;
 }
 .ossn-menu-section-name {
-color: #999;
+color: #ffffff;
 font-size: 13px;
 font-weight: bold;
 margin-bottom: 3px;
 }
 .ossn-menu-newsfeed .title {
 font-size:11px;
-color:#999;
+color:#85004B;
 font-weight:bold;
 margin-left:3px;
 margin-bottom:2px;
@@ -534,7 +534,7 @@ position: absolute;
 padding: 4px;
 }
 .ossn-menu-newsfeed li a{
-color:#141823;
+color:#B6B6B6;
 font-size:12px;
 }
 .ossn-menu-newsfeed li .text {
@@ -545,7 +545,7 @@ width: 132px;
 white-space: nowrap;
 }
 .ossn-menu-newsfeed li:hover{
-background:#DDDEE0;
+background:#000000;
 }
 
 
@@ -554,7 +554,7 @@ margin-top:-5px;
 }
 .ossn-menu-search .title {
 font-size:11px;
-color:#999;
+color:#ffffff;
 font-weight:bold;
 margin-left:3px;
 margin-bottom:2px;
@@ -568,14 +568,14 @@ position: absolute;
 padding: 4px;
 }
 .ossn-menu-search li a{
-color:#141823;
+color:#B6B6B6;
 font-size:12px;
 }
 .ossn-menu-search li .text {
 margin-left: 25px;
 }
 .ossn-menu-search li:hover{
-background:#DDDEE0;
+background:#000000;
 }
 
 
@@ -600,7 +600,7 @@ font-weight: bold;
 width: auto;
 }
 #profile-hr-menu ul {
-background: #fff;
+background: #880045;
 height: 35px;
 list-style: none;
 margin: 0;
@@ -613,7 +613,7 @@ padding: 0px;
 border-right: 1px solid #EEE;
 }
 #profile-hr-menu li a {
-background: #fff;
+background: #B6B6B6;
 display: block;
 font-weight: normal;
 line-height: 45px;
