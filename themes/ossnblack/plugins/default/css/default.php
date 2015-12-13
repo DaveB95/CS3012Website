@@ -96,7 +96,7 @@ background:#222222;
 height:90px;
 }
 .logo-second {
-background:url('<?php echo ossn_theme_url(); ?>images/logo_2.png') no-repeat;
+background:url('<?php echo ossn_theme_url(); ?>images/bar_chart.png') no-repeat;
 height:28px;
 width:28px;
 }

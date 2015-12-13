@@ -41,10 +41,10 @@ margin-left: 503px;
  display: block;
 }
 .ossn-comment-menu .menu-links a:hover{
-color:#fff;
+color:#B62618;
 }
 .ossn-comment-attachment {
-background: #fff;
+background: #B62618;
 width: 467px;
 margin-bottom: 10px;
 margin-left: 45px;
