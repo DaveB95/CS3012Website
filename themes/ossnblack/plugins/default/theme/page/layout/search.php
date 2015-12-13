@@ -10,7 +10,7 @@
  */
 ?>
 <style> body {
-        background: #A66E00;
+        background: #000;
     } </style>
 <div class="ossn-layout-newsfeed">
     <div class="ossn-inner">
