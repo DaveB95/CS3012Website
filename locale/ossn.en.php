@@ -12,12 +12,12 @@
 $en = array(
 	'home' => 'Home',
 	'site:index' => 'Welcome!',
-	'news:feed' => 'News Feed',
-	'new:feed' => 'News Feed',
+	'news:feed' => 'Company Noticeboard',
+	'new:feed' => 'Company Noticeboard',
 	'photos:ossn' => 'Photos',
 	'admin:view:site' => 'View Site',
 	
-	'home:top:heading' => "Welcome to %s! Join now to make new friends, create groups, add photos, and much more.",
+	'home:top:heading' => "Welcome to %s! Make your company better.",
 	'create:account' => 'Create an account',
 	'its:free' => "It's free and always will be.",
 	
@@ -102,8 +102,8 @@ $en = array(
 	
 	'timeline' => 'Timeline',
 	'photos' => 'Photos',
-	'friends' => 'Friends',
-	'links' => 'Links',
+	'friends' => 'Colleagues',
+	'links' => 'Communication',
 	'ossn:add:user:mail:subject' => "%s please confirm your email address for %s!",
 	'ossn:add:user:mail:body' => "Before you can start using %s, you must confirm your email address.
 
@@ -114,7 +114,7 @@ Please confirm your email address by clicking on the link below:
 You may copy and paste the address to your browser manually in case the link does not work.
 
 %s",
-	'user:friends' => 'Friends',
+	'user:friends' => 'Colleagues',
 	'user:account:validated' => 'Account has been validated successfully!',
 	'user:account:validate:fail' => 'Cannot validate account! Please try again later.',
 	
@@ -167,14 +167,14 @@ You may copy and paste the address to your browser manually in case the link doe
 	'close' => 'Close',
 	'open' => 'Open',
 	'public' => 'Public',
-	'friends' => 'Friends',
+	'friends' => 'Colleagues',
 	'privacy:public:note' => 'Everyone on this site can see this.',
-	'privacy:friends:note' => 'Only your friends can see this.',
+	'privacy:friends:note' => 'Only your colleagues can see this.',
 	
 	'add:friend' => 'Add friend',
 	'cancel:request' => 'Cancel Request',
 	'remove:friend' => 'Unfriend',
-	'no:friends' => 'No Friends',
+	'no:friends' => 'No Colleagues',
 	'settings' => 'Settings',
 	'ossn:add:friend:error' => 'Cannot add friend!',
 	'ossn:friend:request:submitted' => 'Your friend request has been sent!',
@@ -226,7 +226,7 @@ Please click the link below to reset password or copy the link and paste into yo
 	//access
 	'title:access:1' => 'Private',
 	'title:access:2' => 'Public',
-	'title:access:3' => 'Friends',
+	'title:access:3' => 'Colleagues',
 	
 	'upload:file:error:ini_size' => 'The file you tried to upload is too large.',
 	'upload:file:error:form_size' => 'The file you tried to upload is too large.',

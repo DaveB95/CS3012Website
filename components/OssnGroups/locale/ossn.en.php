@@ -9,8 +9,8 @@
  * @link      http://www.opensource-socialnetwork.org/licence
  */
 $en = array(
-    'groups' => 'Groups',
-    'add:group' => 'Add Group',
+    'groups' => 'Departments/Projects',
+    'add:group' => 'Add department/project',
     'requests' => 'Requests',
 
     'members' => 'Members',
@@ -22,46 +22,46 @@ $en = array(
     'membership:cancel:succes' => 'Membership request cancelled!',
     'membership:cancel:fail' => 'Cannot cancel membership request! Please try again later.',
 
-    'group:added' => 'Successfully created the group!',
-    'group:add:fail' => 'Cannot create group! Please try again later.',
+    'group:added' => 'Successfully created the department/project!',
+    'group:add:fail' => 'Cannot create department/project! Please try again later.',
 
     'memebership:sent' => 'Request successfully sent!',
     'memebership:sent:fail' => 'Cannot send request! Please try again later.',
 
-    'group:updated' => 'Group has been updated!',
-    'group:update:fail' => 'Cannot update group! Please try again later.',
+    'group:updated' => 'Departments/Projects has been updated!',
+    'group:update:fail' => 'Cannot update department/project! Please try again later.',
 
-    'group:name' => 'Group Name',
-    'group:desc' => 'Group Description',
-    'privacy:group:public' => 'Everyone can see this group and its posts. Only members can post to this group.',
-    'privacy:group:close' => 'Everyone can see this group. Only members can post and see posts.',
+    'group:name' => 'Department/Project Name',
+    'group:desc' => 'Department/Project Description',
+    'privacy:group:public' => 'Everyone can see this department/project and its posts. Only members can post to this group.',
+    'privacy:group:close' => 'Everyone can see this department/project. Only members can post and see posts.',
 
     'group:memb:remove' => 'Remove',
-    'leave:group' => 'Leave Group',
-    'join:group' => 'Join Group',
+    'leave:group' => 'Leave department/project',
+    'join:group' => 'Join department/project',
     'total:members' => 'Total Members',
     'group:members' => "Members (%s)",
     'view:all' => 'View all',
     'member:requests' => 'REQUESTS (%s)',
-    'about:group' => 'Group About',
+    'about:group' => 'Department/Project About',
     'cancel:membership' => 'Membership cancel',
 
     'no:requests' => 'No Requests',
     'approve' => 'Approve',
     'decline' => 'Decline',
-    'search:groups' => 'Search Groups',
+    'search:groups' => 'Search departments/projects',
 
-    'close:group:notice' => 'Join this group to see the posts, photos, and comments.',
-    'closed:group' => 'Closed group',
+    'close:group:notice' => 'Join this department/project to see the posts, photos, and comments.',
+    'closed:group' => 'Closed department/project',
     'group:admin' => 'Admin',
 	
-	'title:access:private:group' => 'Group post',
+	'title:access:private:group' => 'Department/Project post',
 
 	// #186 group join request message var1 = user, var2 = name of group
 	'ossn:notifications:group:joinrequest' => '%s has requested to join %s',
 	'ossn:group:by' => 'By:',
 	
-	'group:deleted' => 'Group and group contents deleted',
-	'group:delete:fail' => 'Group could not be deleted',	
+	'group:deleted' => 'Department/Project and contents deleted',
+	'group:delete:fail' => 'Department/Project could not be deleted',	
 );
 ossn_register_languages('en', $en); 
