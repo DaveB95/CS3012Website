@@ -471,7 +471,7 @@ margin-top: 37px;
 .ossn-wall-friend {
 background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/friend.png') no-repeat;
 width:20px;
-height:17px;
+height:20px;
 }
 .ossn-wall-status {
 background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/status.png') no-repeat;
@@ -481,12 +481,12 @@ height:16px;
 .ossn-wall-location {
 background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/location.png') no-repeat;
 width:20px;
-height:17px;
+height:20px;
 }
 .ossn-wall-photo {
-background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/photo.png') no-repeat;
-width:17px;
-height:17px;
+background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/camera.png') no-repeat;
+width:20px;
+height:20px;
 }
 .ossn-icon-access-friends {
 background:url('<?php echo ossn_theme_url(); ?>images/icons/access/handshake.png') no-repeat;
