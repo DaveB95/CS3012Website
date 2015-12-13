@@ -10,14 +10,14 @@
 */
 .ossn-wall-container {
 	width: 526px;
-	background: #B62618;
+	background: #ffffff;
 	border: 1px solid;
 	border-color: #E5E6E9 #DFE0E4 #D0D1D5;
 	-webkit-border-radius: 3px;
 }
 
 .ossn-wall-container .controls {
-	background-color: #B62618;
+	background-color: #ffffff;
 	border-top: 1px solid #E9EAED;
 	height: 40px;
 	width: 100%;
@@ -26,7 +26,7 @@
 
 .ossn-wall-container .wall-tabs {
 	width: 500px;
-	border-bottom: 1px solid #E5E5E5;
+	border-bottom: 1px solid #B62618;
 	height: 26px;
 }
 
@@ -44,6 +44,7 @@
 	margin-left: 5px;
 	position: absolute;
 	font-size: 12px;
+	color:#000000
 }
 
 .tabs-input {
