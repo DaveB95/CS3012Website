@@ -1313,14 +1313,13 @@ margin: 0 auto;
 }
 .ossn-layout-newsfeed .coloum-left {
 width: 160px;
-margin-left: 200px;
 display: inline-table;
 vertical-align: top;
 }
 .ossn-layout-newsfeed .coloum-middle {
-width: 800px;
+width: 525px;
 display: inline-table;
-margin-left: 200px;
+margin-left: 6px;
 margin-right: 6px;
 }
 
