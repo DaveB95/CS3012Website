@@ -474,9 +474,9 @@ width:20px;
 height:20px;
 }
 .ossn-wall-status {
-background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/status.png') no-repeat;
-width:16px;
-height:16px;
+background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/pencil.png') no-repeat;
+width:20px;
+height:20px;
 }
 .ossn-wall-location {
 background:url('<?php echo ossn_theme_url(); ?>images/icons/wall/location.png') no-repeat;
@@ -494,14 +494,14 @@ width:12px;
 height:12px;
 }
 .ossn-icon-access-public {
-background:url('<?php echo ossn_theme_url(); ?>images/icons/access/public.png') no-repeat;
-width:12px;
+background:url('<?php echo ossn_theme_url(); ?>images/icons/access/public1.png') no-repeat;
+width:13px;
 height:13px;
 }
 .ossn-icon-access-private {
-background:url('<?php echo ossn_theme_url(); ?>images/icons/access/private.png') no-repeat;
-width:10px;
-height:12px;
+background:url('<?php echo ossn_theme_url(); ?>images/icons/access/lock.png') no-repeat;
+width:25px;
+height:25px;
 }
 .ossn-inline-table {
 display:inline-table;
