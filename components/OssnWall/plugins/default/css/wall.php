@@ -44,7 +44,7 @@
 	margin-left: 5px;
 	position: absolute;
 	font-size: 12px;
-	color:#000000
+	color:#B62618;
 }
 
 .tabs-input {
@@ -81,10 +81,11 @@
 .activity-item-container .owner {
 	display: inline-block;
 	float: left;
+	c
 }
 
 .activity-item-container .friends {
-	color: #ccc;
+	color: #F00;
 	display: initial;
 }
 
@@ -97,11 +98,12 @@
 
 .owner-link {
 	font-weight: bold;
+	color: #B62618;
 }
 
 .activity-item-container .time {
 	font-size: 12px;
-	color: #757575;
+	color: #B62618;
 }
 
 .activity-item-container .description .post-text {
@@ -121,6 +123,7 @@
 	padding: 11px;
 	display: inline-block;
 	cursor: pointer;
+	
 }
 
 .controls li:hover {

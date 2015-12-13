@@ -96,6 +96,7 @@ vertical-align: top;
 background:#F6F7F8;
 min-height:50px;
 width:100%;
+color: #000000;
 }
 .ossn-photos-comments {
 display:inline-block;

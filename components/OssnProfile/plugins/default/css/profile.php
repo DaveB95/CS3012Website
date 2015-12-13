@@ -12,7 +12,7 @@ width:850px;
 margin-top: -10px;
 }
 .ossn-profile .top-container{
-background:#fff;
+background:#FFF;
 border: 1px solid #C4CDE0;
 border-width: 1px 1px 2px;
 height:360px;
@@ -179,7 +179,7 @@ width: 108px;
 margin-right: 5px;
 }
 .newseed-uinfo .name a{
-color:#FFFFFF;
+color:#000000;
 display:block;
 font-size: 12px;
 padding: 1px;
