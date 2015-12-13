@@ -18,7 +18,7 @@ font-style: inherit;
 }
 body {
 font-size: 11px;
-font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+font-family:"Gill Sans",sans-serif;
 color: #333;
 }
 hr {
@@ -149,7 +149,7 @@ width: 376px;
 font-size: 30px;
 }
 .home-right-contents .h1-bottom {
-font-family:"Helvetica",Helvetica,sans-serif;
+font-family:"Gill Sans",sans-serif;
 font-size: 22px;
 font-weight: normal;
 line-height: 28px;
@@ -417,7 +417,7 @@ Icons
 .ossn-icons-topbar-friends-new,
 .ossn-icons-topbar-messages-new,
 .ossn-icons-topbar-notifications-new{
-background: url('<?php echo ossn_theme_url(); ?>images/icons/topbar.png') no-repeat;
+background: url('<?php echo ossn_theme_url(); ?>images/icons/access/Handshake-icon (1).png') no-repeat;
 }
 .ossn-icons-topbar-messages{
 background-position: 0 -50px ;
@@ -453,7 +453,7 @@ width: 19px;
 height: 20px;
 }
 .ossn-icon {
-width:22px;
+width:30px;
 }
 .ossn-icons-topbar {
 position: absolute;
@@ -858,7 +858,7 @@ float:right;
 padding: 6px;
 }
 .ossn-topbar-menu li a{
-font-family: 'Helvetica Neue', Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;
+font-family: 'Gill Sans',sans-serif;
 color:#fff;
 text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
 font-size: 12px;
@@ -1373,7 +1373,7 @@ vertical-align: top;
 padding:10px;
 }
 .ossn-layout-module .module-title .title{
-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-family: "Gill Sans", sans-serif;
 font-size: 20px;
 font-weight: bold;
 line-height: 1;
