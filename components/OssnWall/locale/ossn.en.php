@@ -14,7 +14,7 @@ $en = array(
     'post:create:error' => 'Cannot create post! Please try again later.',
     'post' => 'Spread Your Ideas!',
     'enter:location' => 'Enter Location',
-    'tag:friends' => 'Tag Friends',
+    'tag:friends' => 'Tag Colleagues',
     'wall:post:container' => "Have you got any ideas to improve the company?",
     'post' => 'Spread Your Ideas!',
     'post:view' => 'Post View',
@@ -26,6 +26,6 @@ $en = array(
     'ossn:wall:settings:saved' => 'Settings saved!',
     'ossn:wall:admin:notice' => 'Homepage Posts',
     'ossn:wall:allsite:posts' => 'All site posts',
-    'ossn:wall:friends:posts' => 'Friends posts only',
+    'ossn:wall:friends:posts' => 'Colleagues posts only',
 );
 ossn_register_languages('en', $en);

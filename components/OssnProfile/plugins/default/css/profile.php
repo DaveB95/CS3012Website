@@ -43,7 +43,7 @@ height:315px;
 background:#fff url('<?php echo ossn_theme_url(); ?>images/cover-bg.png') repeat-x;
 }
 .ossn-profile .profile-name {
-color: #FFF;
+color: #000000;
 font-weight: bold;
 margin-top: -60px;
 font-size: 0.6cm;
